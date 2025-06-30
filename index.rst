@@ -6,7 +6,16 @@ Procedure for creating a butler repository at FrDF for ComCam multisite campaign
 
    In this note we document the required input datasets and the procedure we followed at the Rubin French Data Facility (FrDF) for creating and populating a butler repository for the needs of ComCam multisite campaigns.
 
-Add content here
-================
+Introduction
+============
 
-See the `Documenteer documentation <https://documenteer.lsst.io/technotes/index.html>`_ for tips on how to write and configure your new technote.
+Input Datasets
+==============
+
+Raw images
+----------
+
+Creating and populating the repository
+======================================
+
+
