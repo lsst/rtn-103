@@ -26,6 +26,12 @@ The location of the repository is referred using the environment variable ``$REP
 
     export REPO='davs://ccdavrubinint.in2p3.fr:2880/pnfs/in2p3.fr/lsst/butler/ccms1'
 
+The location of data to be ingested are defined using the  environment variable ``$DATA``:
+
+.. prompt:: bash
+
+    export DATA='davs://ccdavrubinint.in2p3.fr:2880/pnfs/in2p3.fr/lsst/instrument'
+
 .. _create-empty-repository:
 
 Create an empty repository
@@ -69,8 +75,20 @@ To register the skymap configuration we use the command below:
 
 .. prompt:: bash
 
-    butler --long-log register-skymap --config-file /pbs/throng/lsst/users/byanny/skymaps/lsst_cells_v1.skymap.config $REPO
+    butler --long-log register-skymap --config-file lsst_cells_v1.skymap.config $REPO
 
+Skympa was taken from `/pbs/throng/lsst/users/byanny/skymaps/lsst_cells_v1.skymap.config`.
 More details on the skymap can be found in the issue `DM-46717 <https://rubinobs.atlassian.net/browse/DM-46717>`__
+
+.. _ingest-raw-exposures:
+
+Ingest raw exposures
+--------------------
+
+We ingest the raw exposures using:
+
+.. prompt:: bash
+
+    butler ingest-raws --fail-fast --transfer direct $REPO $DATA/raw/LSSTComCam
 
 
