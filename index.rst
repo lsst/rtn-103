@@ -4,7 +4,7 @@ Procedure for creating a butler repository at FrDF for ComCam multisite campaign
 
 .. abstract::
 
-   In this note we document the required input datasets and the procedure we followed at the Rubin French Data Facility (FrDF) for creating and populating a butler repository for the needs of ComCam multisite campaigns.
+   In this note we document the required input datasets and the procedure we followed at the Rubin French Data Facility (FrDF) for creating and populating a butler repository for the needs of ComCam multisite campaigns. Based on `DM-48746 <https://rubinobs.atlassian.net/browse/DM-48746>`__
 
 Introduction
 ============
@@ -26,6 +26,8 @@ The location of the repository is referred using the environment variable ``$REP
 
     export REPO='davs://ccdavrubinint.in2p3.fr:2880/pnfs/in2p3.fr/lsst/butler/ccms1'
 
+.. _create-empty-repository:
+
 Create an empty repository
 --------------------------
 
@@ -46,4 +48,29 @@ To create the repository at location ``$REPO`` we use the command:
 .. prompt:: bash
 
     butler --long-log create --seed-config butler-seed_ccms1.yaml --override $REPO
+
+.. _register-instrument:
+
+Register instrument
+-------------------
+
+To register the instrument for this repository we use the command below:
+
+.. prompt:: bash
+
+    butler --long-log register-instrument $REPO lsst.obs.lsst.LsstComCam
+
+.. _register-sky-map:
+
+Register SkyMap
+----------------
+
+To register the skymap configuration we use the command below:
+
+.. prompt:: bash
+
+    butler --long-log register-skymap --config-file /pbs/throng/lsst/users/byanny/skymaps/lsst_cells_v1.skymap.config $REPO
+
+More details on the skymap can be found in the issue `DM-46717 <https://rubinobs.atlassian.net/browse/DM-46717>`__
+
 
