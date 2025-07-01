@@ -115,7 +115,7 @@ To define visits from the exposures previously ingested into the repository we u
 Add instrument's curated calibrations
 -------------------------------------
 
-To ingest the known calibration data for LSSTComCam (see `DM-48650 >https://rubinobs.atlassian.net/browse/DM-48650>`__) we use the command below:
+To ingest the known calibration data for LSSTComCam (see `DM-48650 <https://rubinobs.atlassian.net/browse/DM-48650>`__) we use the command below:
 
 .. prompt:: bash
 
