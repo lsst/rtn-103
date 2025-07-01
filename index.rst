@@ -104,9 +104,21 @@ One can then check that all visits / detectors have been ingested:
 Define visits
 -------------
 
-To define visits from the exposures previously ingested into the repository in collection ``LSSTCam-imSim/raw/all`` for instrument ``LSSTCam-imSim`` we use the command below:
+To define visits from the exposures previously ingested into the repository we use the command below:
 
 .. prompt:: bash
     
     butler define-visits $REPO LSSTComCam --collections LSSTComCam/raw/all
+
+.. _add-instrument-calibrations:
+
+Add instrument's curated calibrations
+-------------------------------------
+
+To ingest the known calibration data for LSSTComCam (see `DM-48650 >https://rubinobs.atlassian.net/browse/DM-48650>`__) we use the command below:
+
+.. prompt:: bash
+
+    butler write-curated-calibrations $REPO lsst.obs.lsst.LsstComCam --label DM-48650
+    butler collection-chain $REPO --mode=extend LSSTComCam/calib LSSTComCam/calib/DM-48650 LSSTComCam/calib/DM-48650/unbounded
 
