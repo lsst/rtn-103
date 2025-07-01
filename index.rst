@@ -77,7 +77,7 @@ To register the skymap configuration we use the command below:
 
     butler --long-log register-skymap --config-file lsst_cells_v1.skymap.config $REPO
 
-Skympa was taken from `/pbs/throng/lsst/users/byanny/skymaps/lsst_cells_v1.skymap.config`.
+Skymap was taken from `/pbs/throng/lsst/users/byanny/skymaps/lsst_cells_v1.skymap.config`.
 More details on the skymap can be found in the issue `DM-46717 <https://rubinobs.atlassian.net/browse/DM-46717>`__
 
 .. _ingest-raw-exposures:
@@ -91,4 +91,22 @@ We ingest the raw exposures using:
 
     butler ingest-raws --fail-fast --transfer direct $REPO $DATA/raw/LSSTComCam
 
+Note that parallel ingestion was performed to speedup the process.
+One can then check that all visits / detectors have been ingested:
+
+.. prompt:: bash
+
+    butler query-datasets $REPO raw --collections  LSSTComCam/raw/all --limit 200000 |wc -l
+    148849
+
+.. _define-visits:
+
+Define visits
+-------------
+
+To define visits from the exposures previously ingested into the repository in collection ``LSSTCam-imSim/raw/all`` for instrument ``LSSTCam-imSim`` we use the command below:
+
+.. prompt:: bash
+    
+    butler define-visits $REPO LSSTComCam --collections LSSTComCam/raw/all
 
