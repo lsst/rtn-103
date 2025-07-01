@@ -120,19 +120,11 @@ To ingest the known calibration data for LSSTComCam (see `DM-48650 <https://rubi
 .. prompt:: bash
 
     butler write-curated-calibrations $REPO lsst.obs.lsst.LsstComCam --label DM-48650
-    butler collection-chain $REPO --mode=extend LSSTComCam/calib LSSTComCam/calib/DM-48650 LSSTComCam/calib/DM-48650/unbounded
 
 .. _import-calibration-data:
 
 Ingest calibration data
 -----------------------
-
-To ingest calibration data we use the command below:
-
-.. prompt:: bash
-
-    butler import $REPO $DATA/ancillary --export-file export.yaml  -t direct
-
 
 The list of calibrations to ingest is the following:
 
@@ -147,4 +139,24 @@ The list of calibrations to ingest is the following:
 * `DM-47498 <https://rubinobs.atlassian.net/browse/DM-47498>`__
 * `DM-48650 <https://rubinobs.atlassian.net/browse/DM-48650>`__
 
+Each item corresponds to a calibration collection at USDF, and requires an `export.yaml` to be ingested. These files can be found at USF in the directory `/sdf/data/rubin/shared/calibration_archive`, for instance:
+
+.. prompt:: bash
+
+    cd /sdf/data/rubin/shared/calibration_archive
+    rg -l DM-48520 . | grep export.yaml |& head -1
+    ./TAXICAB-23/LSSTComCam.calibs.20250213a/export.yaml
+
+These files can be manually retrieved through ssh, although they will eventually be managed by Rucio.
+To ingest calibration data we use the command below, for each collection:
+
+.. prompt:: bash
+
+    butler import $REPO $DATA/ancillary --export-file export.yaml  -t direct
+
+Once all calibrations have been ingested, a global calibration collection is defined:
+
+.. prompt:: bash
+
+    butler collection-chain $REPO LSSTComCam/calib LSSTComCam/calib/DM-48955,LSSTComCam/calib/DM-48520,LSSTComCam/calib/DM-47365,LSSTComCam/calib/DM-47741,LSSTComCam/calib/DM-47547,LSSTComCam/calib/DM-47499,LSSTComCam/calib/DM-47447,LSSTComCam/calib/DM-47197,LSSTComCam/calib/DM-46360,LSSTComCam/calib/DM-47498,LSSTComCam/calib/DM-48650,LSSTComCam/calib/DM-48650/unbounded
 
