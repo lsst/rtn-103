@@ -122,3 +122,29 @@ To ingest the known calibration data for LSSTComCam (see `DM-48650 <https://rubi
     butler write-curated-calibrations $REPO lsst.obs.lsst.LsstComCam --label DM-48650
     butler collection-chain $REPO --mode=extend LSSTComCam/calib LSSTComCam/calib/DM-48650 LSSTComCam/calib/DM-48650/unbounded
 
+.. _import-calibration-data:
+
+Ingest calibration data
+-----------------------
+
+To ingest calibration data we use the command below:
+
+.. prompt:: bash
+
+    butler import $REPO $DATA/ancillary --export-file export.yaml  -t direct
+
+
+The list of calibrations to ingest is the following:
+
+* `DM-48520 <https://rubinobs.atlassian.net/browse/DM-48520>`__
+* `DM-47365 <https://rubinobs.atlassian.net/browse/DM-47365>`__
+* `DM-47741 <https://rubinobs.atlassian.net/browse/DM-47741>`__
+* `DM-47547 <https://rubinobs.atlassian.net/browse/DM-47547>`__ 
+* `DM-47499 <https://rubinobs.atlassian.net/browse/DM-47499>`__
+* `DM-47447 <https://rubinobs.atlassian.net/browse/DM-47447>`__
+* `DM-47197 <https://rubinobs.atlassian.net/browse/DM-47197>`__
+* `DM-46360 <https://rubinobs.atlassian.net/browse/DM-46360>`__
+* `DM-47498 <https://rubinobs.atlassian.net/browse/DM-47498>`__
+* `DM-48650 <https://rubinobs.atlassian.net/browse/DM-48650>`__
+
+
