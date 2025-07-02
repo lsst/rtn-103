@@ -161,7 +161,7 @@ Once all calibrations have been ingested, a global calibration collection is def
     butler collection-chain $REPO LSSTComCam/calib LSSTComCam/calib/DM-48955,LSSTComCam/calib/DM-48520,LSSTComCam/calib/DM-47365,LSSTComCam/calib/DM-47741,LSSTComCam/calib/DM-47547,LSSTComCam/calib/DM-47499,LSSTComCam/calib/DM-47447,LSSTComCam/calib/DM-47197,LSSTComCam/calib/DM-46360,LSSTComCam/calib/DM-47498,LSSTComCam/calib/DM-48650,LSSTComCam/calib/DM-48650/unbounded
 
 
-.. _ingest-catalog:
+.. _ingest-reference-catalog:
 
 Ingest reference catalogs
 -------------------------
@@ -191,3 +191,49 @@ A chained collection is then created:
 .. prompt:: bash
 
     butler collection-chain $REPO refcats refcats/DM-46370/the_monster_20240904,refcats/DM-49042/the_monster_20250219
+
+.. _ingest-pretrained-models:
+
+Ingest Pretrained-models catalog
+--------------------------------
+
+Pretrained-models catalog is ingested with:
+
+.. prompt:: bash
+
+    butler import $REPO  --export-file pretrained-models-export.yaml -t direct $DATA/ancillary/
+
+where `pretrained-models-export.yaml` has the following content:
+
+.. code-block:: yaml
+
+    description: Butler Data Repository Export
+    version: 1.0.2
+    universe_version: 7
+    universe_namespace: daf_butler
+    data:
+    - type: collection
+      collection_type: RUN
+      name: pretrained_models/tac_cnn_comcam_2025-02-18
+      host: null
+      timespan_begin: null
+      timespan_end: null
+    - type: dataset_type
+      name: pretrainedModelPackage
+      dimensions: []
+      storage_class: NNModelPackagePayload
+      is_calibration: false
+    - type: dataset
+      dataset_type: pretrainedModelPackage
+      run: pretrained_models/tac_cnn_comcam_2025-02-18
+      records:
+      - dataset_id:
+        - !uuid 'a83d850a-0094-417c-ac9c-64d0f7b98048'
+        data_id:
+        - {}
+        path: pretrained_models/tac_cnn_comcam_2025-02-18/pretrainedModelPackage/pretrainedModelPackage_pretrained_models_tac_cnn_comcam_2025-02-18.zip
+        formatter: lsst.meas.transiNet.modelPackages.formatters.NNModelPackageFormatter
+    
+	
+
+butler collection-chain $REPO pretrained_models pretrained_models/tac_cnn_comcam_2025-02-18
