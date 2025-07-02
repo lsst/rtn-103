@@ -234,6 +234,64 @@ where `pretrained-models-export.yaml` has the following content:
         path: pretrained_models/tac_cnn_comcam_2025-02-18/pretrainedModelPackage/pretrainedModelPackage_pretrained_models_tac_cnn_comcam_2025-02-18.zip
         formatter: lsst.meas.transiNet.modelPackages.formatters.NNModelPackageFormatter
     
-	
+A chained collection is then created:
 
-butler collection-chain $REPO pretrained_models pretrained_models/tac_cnn_comcam_2025-02-18
+.. prompt:: bash	
+
+    butler collection-chain $REPO pretrained_models pretrained_models/tac_cnn_comcam_2025-02-18
+
+.. _ingest-fgcm:
+
+Ingest FGCM calibration
+-----------------------
+
+FGCM calibration (see `DM-48089 <https://rubinobs.atlassian.net/browse/DM-48089>`__) is ingested with:
+
+.. prompt:: bash
+
+    butler import $REPO --export-file DM-48089-fgcmLookupTable-export.yaml -t direct $DATA/ancillary/
+
+where `DM-48089-fgcmLookupTable-export.yaml` has the following content:
+
+.. code-block:: yaml
+
+    description: Butler Data Repository Export
+    version: 1.0.2
+    universe_version: 7
+    universe_namespace: daf_butler
+    data:
+    - type: dimension
+      element: instrument
+      records:
+      - name: LSSTComCam
+        visit_max: 7050123199999
+        visit_system: 2
+        exposure_max: 7050123199999
+        detector_max: 1000
+        class_name: lsst.obs.lsst.LsstComCam
+    - type: collection
+      collection_type: RUN
+      name: LSSTComCam/calib/fgcmcal/DM-48089
+      host: null
+      timespan_begin: null
+      timespan_end: null
+    - type: dataset_type
+      name: fgcmLookUpTable
+      dimensions:
+      - instrument
+      storage_class: Catalog
+      is_calibration: false
+    - type: dataset
+      dataset_type: fgcmLookUpTable
+      run: LSSTComCam/calib/fgcmcal/DM-48089
+      records:
+      - dataset_id:
+        - !uuid 'bb573ca3-6159-45d9-88e3-866e01da4882'
+        data_id:
+        - instrument: LSSTComCam
+        path: LSSTComCam/calib/fgcmcal/DM-48089/fgcmLookUpTable/fgcmLookUpTable_LSSTComCam_LSSTComCam_calib_fgcmcal_DM-48089.fits
+        formatter: lsst.obs.base.formatters.fitsGeneric.FitsGenericFormatter
+
+
+
+butler collection-chain $REPO LSSTComCam/calib/fgcmcal LSSTComCam/calib/fgcmcal/DM-48089  
