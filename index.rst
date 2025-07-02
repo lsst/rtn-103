@@ -311,7 +311,7 @@ Solar System Objects catalog (see `DM-49977 <https://rubinobs.atlassian.net/brow
 
 where the file `export.yaml` has been provided by B. Yanny. A TAGGED collection is then created, including all datasets:
 
-.. code_block:: python
+.. code-block:: python
 
     butler = Butler('$REPO',writeable=True)
     butler.registry.registerCollection("LSSTComCam/calib/DM-49977/DP1.0/preloaded_SsObjects.20250409", CollectionType.TAGGED)
