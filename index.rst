@@ -160,3 +160,34 @@ Once all calibrations have been ingested, a global calibration collection is def
 
     butler collection-chain $REPO LSSTComCam/calib LSSTComCam/calib/DM-48955,LSSTComCam/calib/DM-48520,LSSTComCam/calib/DM-47365,LSSTComCam/calib/DM-47741,LSSTComCam/calib/DM-47547,LSSTComCam/calib/DM-47499,LSSTComCam/calib/DM-47447,LSSTComCam/calib/DM-47197,LSSTComCam/calib/DM-46360,LSSTComCam/calib/DM-47498,LSSTComCam/calib/DM-48650,LSSTComCam/calib/DM-48650/unbounded
 
+
+.. _ingest-catalog:
+
+Ingest reference catalogs
+-------------------------
+
+Two versions of "The Monster" catalog are ingested (see `DM-46370 <https://rubinobs.atlassian.net/browse/DM-46370>`__ and `DM-49042 <https://rubinobs.atlassian.net/browse/DM-49042>`__).
+For the first version, the corresponding dataset type is registered with:
+
+.. prompt:: bash
+
+    butler register-dataset-type $REPO the_monster_20240904 SimpleCatalog htm7
+
+Then the ingestion is done:
+
+.. prompt:: bash
+
+    butler ingest-files $REPO the_monster_20240904 refcats/DM-46370/the_monster_20240904 --prefix $DATA/raw/refcats/the_monster_20240904/ -t direct the_monster_20240904.ecsv
+
+where the file `the_monster_20240904.ecsv` has been provided by B. Yanny. Similarly, for the second version:
+
+.. prompt:: bash
+
+    butler register-dataset-type $REPO the_monster_20250219 SimpleCatalog htm7
+    butler ingest-files $REPO the_monster_20250219 refcats/DM-49042/the_monster_20250219 --prefix $DATA/raw/refcats/the_monster_20250219/ -t direct the_monster_20250219.ecsv
+
+A chained collection is then created:
+
+.. prompt:: bash
+
+    butler collection-chain $REPO refcats refcats/DM-46370/the_monster_20240904,refcats/DM-49042/the_monster_20250219
