@@ -4,7 +4,7 @@ Procedure for creating a butler repository at FrDF for ComCam multisite campaign
 
 .. abstract::
 
-   In this note we document the required input datasets and the procedure we followed at the Rubin French Data Facility (FrDF) for creating and populating a butler repository for the needs of ComCam multisite campaigns. Based on `DM-48746 <https://rubinobs.atlassian.net/browse/DM-48746>`__
+   In this note we document the required input datasets and the procedure we followed at the Rubin French Data Facility (FrDF) for creating and populating a butler repository for the needs of ComCam multisite campaigns. This note is base on `DM-48746 <https://rubinobs.atlassian.net/browse/DM-48746>`__.
 
 Introduction
 ============
@@ -18,7 +18,7 @@ Raw images
 Creating and populating the repository
 ======================================
 
-Wwe present here the procedure we used for creating and populating the repository using the `LSST Science Pipelines <https://pipelines.lsst.io>`__ 
+We present here the procedure we used for creating and populating the repository.
 
 The location of the repository is referred using the environment variable ``$REPO``:
 
@@ -26,7 +26,7 @@ The location of the repository is referred using the environment variable ``$REP
 
     export REPO='davs://ccdavrubinint.in2p3.fr:2880/pnfs/in2p3.fr/lsst/butler/ccms1'
 
-The location of data to be ingested are defined using the  environment variable ``$DATA``:
+The location of data to be ingested is defined using the environment variable ``$DATA``:
 
 .. prompt:: bash
 
@@ -53,7 +53,7 @@ To create the repository at location ``$REPO`` we use the command:
 
 .. prompt:: bash
 
-    butler --long-log create --seed-config butler-seed_ccms1.yaml --override $REPO
+    butler create --seed-config butler-seed_ccms1.yaml --override $REPO
 
 .. _register-instrument:
 
@@ -64,7 +64,7 @@ To register the instrument for this repository we use the command below:
 
 .. prompt:: bash
 
-    butler --long-log register-instrument $REPO lsst.obs.lsst.LsstComCam
+    butler register-instrument $REPO lsst.obs.lsst.LsstComCam
 
 .. _register-sky-map:
 
@@ -75,10 +75,10 @@ To register the skymap configuration we use the command below:
 
 .. prompt:: bash
 
-    butler --long-log register-skymap --config-file lsst_cells_v1.skymap.config $REPO
+    butler register-skymap --config-file lsst_cells_v1.skymap.config $REPO
 
-Skymap was taken from `/pbs/throng/lsst/users/byanny/skymaps/lsst_cells_v1.skymap.config`.
-More details on the skymap can be found in the issue `DM-46717 <https://rubinobs.atlassian.net/browse/DM-46717>`__
+Skymap used was `/pbs/throng/lsst/users/byanny/skymaps/lsst_cells_v1.skymap.config`.
+More details on the skymap can be found in the issue `DM-46717 <https://rubinobs.atlassian.net/browse/DM-46717>`__.
 
 .. _ingest-raw-exposures:
 
@@ -96,7 +96,7 @@ One can then check that all visits / detectors have been ingested:
 
 .. prompt:: bash
 
-    butler query-datasets $REPO raw --collections  LSSTComCam/raw/all --limit 200000 |wc -l
+    butler query-datasets $REPO raw --collections LSSTComCam/raw/all --limit 0 | wc -l
     148849
 
 Since there are 9 detectors in LSSTComCam, this corresponds to the approximate number of 16000 exposures in the LSSTComCam campaign.
@@ -154,7 +154,7 @@ To ingest calibration data we use the command below, for each collection:
 
 .. prompt:: bash
 
-    butler import $REPO $DATA/ancillary --export-file export.yaml  -t direct
+    butler import $REPO $DATA/ancillary --export-file export.yaml -t direct
 
 Once all calibrations have been ingested, a global calibration collection is defined:
 
@@ -203,7 +203,7 @@ Pretrained-models catalog is ingested with:
 
 .. prompt:: bash
 
-    butler import $REPO  --export-file pretrained-models-export.yaml -t direct $DATA/ancillary/
+    butler import $REPO --export-file pretrained-models-export.yaml -t direct $DATA/ancillary/
 
 where `pretrained-models-export.yaml` has the following content:
 
