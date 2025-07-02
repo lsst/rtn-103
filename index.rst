@@ -99,6 +99,8 @@ One can then check that all visits / detectors have been ingested:
     butler query-datasets $REPO raw --collections  LSSTComCam/raw/all --limit 200000 |wc -l
     148849
 
+Since there are 9 detectors in LSSTComCam, this corresponds to the approximate number of 16000 exposures in the LSSTComCam campaign.
+
 .. _define-visits:
 
 Define visits
@@ -318,5 +320,16 @@ where the file `export.yaml` has been provided by B. Yanny. A TAGGED collection 
     dataset_refs = butler.registry.queryDatasets("preloaded_DRP_SsObjects",collections="u/jkurla/dp1_ephem_2*",instrument="LSSTComCam")
     butler.registry.associate("LSSTComCam/calib/DM-49977/DP1.0/preloaded_SsObjects.20250409", dataset_refs)
 
+.. _create-collection:
 
+Create global collection
+------------------------
 
+Within the 16000 exposures ingested, about 2000 are Science exposures (each with 9 detectors):
+
+.. prompt:: bash
+
+    butler query-datasets $REPO raw --collections LSSTComCam/raw/all --where "exposure.observation_type='science'" --limit 0 |wc -l
+    19205
+
+From these ones, 1792 exposures have been selected to be processed (see `DM-49594 <https://rubinobs.atlassian.net/browse/DM-49594>`__). We define therefore a collection containing thse 1792 selected LSSTComCam exposures. 
