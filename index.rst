@@ -292,6 +292,31 @@ where `DM-48089-fgcmLookupTable-export.yaml` has the following content:
         path: LSSTComCam/calib/fgcmcal/DM-48089/fgcmLookUpTable/fgcmLookUpTable_LSSTComCam_LSSTComCam_calib_fgcmcal_DM-48089.fits
         formatter: lsst.obs.base.formatters.fitsGeneric.FitsGenericFormatter
 
+A chained collection is then created:
+
+.. prompt:: bash
+
+    butler collection-chain $REPO LSSTComCam/calib/fgcmcal LSSTComCam/calib/fgcmcal/DM-48089  
+
+.. _ingest-sso:
+
+Ingest Solar System Objects catalog
+-----------------------------------
+
+Solar System Objects catalog (see `DM-49977 <https://rubinobs.atlassian.net/browse/DM-49977>`__) is ingested with:
+
+.. prompt:: bash
+
+    butler import $REPO --export-file export.yaml -t direct $DATA/ancillary/
+
+where the file `export.yaml` has been provided by B. Yanny. A TAGGED collection is then created, including all datasets:
+
+.. code_block:: python
+
+    butler = Butler('$REPO',writeable=True)
+    butler.registry.registerCollection("LSSTComCam/calib/DM-49977/DP1.0/preloaded_SsObjects.20250409", CollectionType.TAGGED)
+    dataset_refs = butler.registry.queryDatasets("preloaded_DRP_SsObjects",collections="u/jkurla/dp1_ephem_2*",instrument="LSSTComCam")
+    butler.registry.associate("LSSTComCam/calib/DM-49977/DP1.0/preloaded_SsObjects.20250409", dataset_refs)
 
 
-butler collection-chain $REPO LSSTComCam/calib/fgcmcal LSSTComCam/calib/fgcmcal/DM-48089  
+
