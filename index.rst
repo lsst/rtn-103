@@ -332,4 +332,16 @@ Within the 16000 exposures ingested, about 2000 are Science exposures (each with
     butler query-datasets $REPO raw --collections LSSTComCam/raw/all --where "exposure.observation_type='science'" --limit 0 |wc -l
     19205
 
-From these ones, 1792 exposures have been selected to be processed (see `DM-49594 <https://rubinobs.atlassian.net/browse/DM-49594>`__). We define therefore a collection containing thse 1792 selected LSSTComCam exposures. 
+From these ones, 1792 exposures have been selected to be processed (see `DM-49594 <https://rubinobs.atlassian.net/browse/DM-49594>`__). We define therefore a collection containing thse 1792 selected LSSTComCam exposures:
+
+.. prompt:: bash
+
+    python /pbs/throng/lsst/users/byanny/butler_associate_visits.py $REPO /pbs/throng/lsst/users/byanny/dp1_good_visits.txt LSSTComCam/raw/DP1-RC3/DM-49594 LSSTComCam/raw/all LSSTComCam 2000
+
+Finally, we define a collection containg all input collections previously defined:
+
+.. prompt:: bash
+
+    butler collection-chain $REPO LSSTComCam/DP1/defaults LSSTComCam/raw/DP1-RC3/DM-49594,LSSTComCam/calib,refcats,skymaps,pretrained_models,LSSTComCam/calib/fgcmcal,LSSTComCam/calib/DM-49977/DP1.0/preloaded_SsObjects.20250409
+
+
