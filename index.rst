@@ -15,6 +15,28 @@ Input Datasets
 Raw images
 ----------
 
+For the ComCam multisite butler repository we use the 16000 exposures raw images produced during the LSSTComCam campaign (about 16000 exposures).
+Raw exposures are registered in Rucio in the `raw` scope, in a dataset named `Dataset/LSSTComCam/raw/<date>`, where `<date>` is the date where the exposure has been acquired.
+They are replicated at FrDF and are located in `davs://ccdavrubinint.in2p3.fr:2880/pnfs/in2p3.fr/lsst/instrument/raw/LSSTComCam/`.
+To facilitate ingestion, a metadata file `_index.json` has been generated for each exposure using the `astrometadata` package, and uploaded in the same directory as the exposure files.
+
+Calibration data
+----------------
+
+LSSTComCam calibration data are located at USDF in the `/repo/main` butler repository, and are registered in the `ancillary` scope, in datasets named `Dataset/LSSTComCam/$DSLABEL/$TICKET`.
+
+.. prompt:: bash
+
+    rucio-register data-products \
+      -s 10 \
+      -C /sdf/data/rubin/shared/calibration_archive/rucio/main-calib-config.yaml \
+      -r /repo/main \
+      -t $dstype \
+      -c $COLLECTION \
+      -d $DATASET
+
+
+
 Creating and populating the repository
 ======================================
 
