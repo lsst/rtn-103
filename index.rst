@@ -12,6 +12,14 @@ Introduction
 Input Datasets
 ==============
 
+.. _import-sky-map:
+
+SkyMap
+------
+
+Skymap used was `/pbs/throng/lsst/users/byanny/skymaps/lsst_cells_v1.skymap.config`.
+More details on the skymap can be found in the issue `DM-46717 <https://rubinobs.atlassian.net/browse/DM-46717>`__.
+
 .. _import-raw-exposures:
 
 Raw images
@@ -19,7 +27,7 @@ Raw images
 
 For the ComCam multisite butler repository we use the 16000 exposures raw images produced during the LSSTComCam campaign (about 16000 exposures).
 Raw exposures are registered in Rucio in the `raw` scope, in a dataset named `Dataset/LSSTComCam/raw/<date>`, where `<date>` is the date where the exposure has been acquired.
-They are replicated at FrDF and are located in `davs://ccdavrubinint.in2p3.fr:2880/pnfs/in2p3.fr/lsst/instrument/raw/LSSTComCam/`.
+They are automatically replicated at FrDF and are located in `davs://ccdavrubinint.in2p3.fr:2880/pnfs/in2p3.fr/lsst/instrument/raw/LSSTComCam/`.
 To facilitate ingestion, a metadata file `_index.json` has been generated for each exposure using the `astrometadata` package, and uploaded in the same directory as the exposure files.
 
 .. _import-calibration-data:
@@ -39,8 +47,8 @@ LSSTComCam calibration data are located at USDF in the `/repo/main` butler repos
 * `DM-46360 <https://rubinobs.atlassian.net/browse/DM-46360>`__
 * `DM-47498 <https://rubinobs.atlassian.net/browse/DM-47498>`__
 
-# curated calibrations
-# * `DM-48650 <https://rubinobs.atlassian.net/browse/DM-48650>`__
+### curated calibrations
+### * `DM-48650 <https://rubinobs.atlassian.net/browse/DM-48650>`__
 
 Each item is a ticket (`$TICKET`) that corresponds to a calibration collection (`COLLECTION=$INSTRUMENT/calib/$TICKET`), and requires an `export.yaml` to be ingested. These files can be found at USDF in the directory `/sdf/data/rubin/shared/calibration_archive`:
 
@@ -85,6 +93,29 @@ or
 
     rucio rule add --rses 'IN2P3_RAW_DISK' --copies 1 ancillary:$DATASET
 
+They are located in `davs://ccdavrubinint.in2p3.fr:2880/pnfs/in2p3.fr/lsst/instrument/ancillary/LSSTComCam/calib/`.
+
+.. _import-reference-catalog:
+
+Reference catalogs
+------------------
+
+Two versions of "The Monster" catalog are used (see `DM-46370 <https://rubinobs.atlassian.net/browse/DM-46370>`__ and `DM-49042 <https://rubinobs.atlassian.net/browse/DM-49042>`__).
+Both are located at USDF in `/sdf/data/rubin/shared/refcats`, and registered in Rucio, in datasets `Dataset/refcats/the_monster_20240219_1` and `Dataset/refcats/the_monster_20240904` ?
+
+They are replicated at FRDF with:
+
+.. prompt:: bash
+
+    rucio rule add --rses 'SLAC_DATA_DISK|IN2P3_RAW_DISK' --copies 2 raw:Dataset/refcats/the_monster_20240219_1
+
+or
+
+.. prompt:: bash
+
+    rucio rule add --rses 'IN2P3_RAW_DISK' --copies 1 raw:Dataset/refcats/the_monster_20240219_1
+
+and are located in `davs://ccdavrubinint.in2p3.fr:2880/pnfs/in2p3.fr/lsst/instrument/raw/refcats/`.
 
 Creating and populating the repository
 ======================================
@@ -147,9 +178,6 @@ To register the skymap configuration we use the command below:
 .. prompt:: bash
 
     butler register-skymap --config-file lsst_cells_v1.skymap.config $REPO
-
-Skymap used was `/pbs/throng/lsst/users/byanny/skymaps/lsst_cells_v1.skymap.config`.
-More details on the skymap can be found in the issue `DM-46717 <https://rubinobs.atlassian.net/browse/DM-46717>`__.
 
 .. _ingest-raw-exposures:
 
