@@ -12,6 +12,8 @@ Introduction
 Input Datasets
 ==============
 
+.. _import-raw-exposures:
+
 Raw images
 ----------
 
@@ -20,10 +22,40 @@ Raw exposures are registered in Rucio in the `raw` scope, in a dataset named `Da
 They are replicated at FrDF and are located in `davs://ccdavrubinint.in2p3.fr:2880/pnfs/in2p3.fr/lsst/instrument/raw/LSSTComCam/`.
 To facilitate ingestion, a metadata file `_index.json` has been generated for each exposure using the `astrometadata` package, and uploaded in the same directory as the exposure files.
 
+.. _import-calibration-data:
+
 Calibration data
 ----------------
 
-LSSTComCam calibration data are located at USDF in the `/repo/main` butler repository, and are registered in the `ancillary` scope, in datasets named `Dataset/LSSTComCam/$DSLABEL/$TICKET`.
+LSSTComCam calibration data are located at USDF in the `/repo/main` butler repository. The list of calibrations to ingest is the following:
+
+* `DM-48520 <https://rubinobs.atlassian.net/browse/DM-48520>`__
+* `DM-47365 <https://rubinobs.atlassian.net/browse/DM-47365>`__
+* `DM-47741 <https://rubinobs.atlassian.net/browse/DM-47741>`__
+* `DM-47547 <https://rubinobs.atlassian.net/browse/DM-47547>`__
+* `DM-47499 <https://rubinobs.atlassian.net/browse/DM-47499>`__
+* `DM-47447 <https://rubinobs.atlassian.net/browse/DM-47447>`__
+* `DM-47197 <https://rubinobs.atlassian.net/browse/DM-47197>`__
+* `DM-46360 <https://rubinobs.atlassian.net/browse/DM-46360>`__
+* `DM-47498 <https://rubinobs.atlassian.net/browse/DM-47498>`__
+# curated calibrations
+# * `DM-48650 <https://rubinobs.atlassian.net/browse/DM-48650>`__
+
+Each item is a ticket (`$TICKET`) that corresponds to a calibration collection (`COLLECTION=$INSTRUMENT/calib/$TICKET`), and requires an `export.yaml` to be ingested. These files can be found at USDF in the directory `/sdf/data/rubin/shared/calibration_archive`:
+
+.. prompt:: bash
+
+    cd /sdf/data/rubin/shared/calibration_archive
+    rg -l $TICKET TAXICAB-* | grep export.yaml |& head -1
+
+For instance:
+
+.. prompt:: bash
+
+    rg -l DM-48520 TAXICAB-* | grep export.yaml |& head -1
+    ./TAXICAB-23/LSSTComCam.calibs.20250213a/export.yaml
+
+Each collection is registered in Rucio in the `ancillary` scope using the following command:
 
 .. prompt:: bash
 
@@ -35,6 +67,21 @@ LSSTComCam calibration data are located at USDF in the `/repo/main` butler repos
       -c $COLLECTION \
       -d $DATASET
 
+    rucio did update --close ancillary:$DATASET
+
+where `$dstype` is the dataset type (`dstyps` in our case), `$COLLECTION` is the collection name as defined above, and `$DATASET` is the dataset name: `Dataset/LSSTComCam/$dstype/$TICKET`.
+
+The registered data products can then be replicated at FrDF:
+
+.. prompt:: bash
+
+    rucio rule add --rses 'SLAC_BUTLER_DISK|IN2P3_RAW_DISK' --copies 2 ancillary:$DATASET
+
+or
+
+.. prompt:: bash
+
+    rucio rule add --rses 'IN2P3_RAW_DISK' --copies 1 ancillary:$DATASET
 
 
 Creating and populating the repository
@@ -145,7 +192,7 @@ To ingest the known calibration data for LSSTComCam (see `DM-48650 <https://rubi
 
     butler write-curated-calibrations $REPO lsst.obs.lsst.LsstComCam --label DM-48650
 
-.. _import-calibration-data:
+.. _ingest-calibration-data:
 
 Ingest calibration data
 -----------------------
