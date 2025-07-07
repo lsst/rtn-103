@@ -107,15 +107,51 @@ They are replicated at FRDF with:
 
 .. prompt:: bash
 
-    rucio rule add --rses 'SLAC_DATA_DISK|IN2P3_RAW_DISK' --copies 2 raw:Dataset/refcats/the_monster_20240219_1
-
-or
-
-.. prompt:: bash
-
     rucio rule add --rses 'IN2P3_RAW_DISK' --copies 1 raw:Dataset/refcats/the_monster_20240219_1
 
 and are located in `davs://ccdavrubinint.in2p3.fr:2880/pnfs/in2p3.fr/lsst/instrument/raw/refcats/`.
+
+.. _import-pretrained-models:
+
+Pretrained-models catalog
+-------------------------
+
+Pretrained-models catalog is registered in Rucio in the `ancillary`, in dataset `Dataset/LSSTComCam/dstyps/pretrained-models`.
+It is replicated at FrDF with:
+
+.. prompt:: bash
+
+    rucio rule add --rses IN2P3_RAW_DISK --copies 1 ancillary:Dataset/LSSTComCam/dstyps/pretrained-models
+
+and is located in `davs://ccdavrubinint.in2p3.fr:2880/pnfs/in2p3.fr/lsst/instrument/ancillary/pretrained_models/`.
+
+.. _import-fgcm:
+
+FGCM calibration
+----------------
+
+FGCM lookup table (see `DM-48089 <https://rubinobs.atlassian.net/browse/DM-48089>`__) is registered in Rucio in the `ancillary`, in dataset `Dataset/LSSTComCam/dstyps/fgcmLookUpTable`.
+It is replicated at FrDF with:
+
+.. prompt:: bash
+
+    rucio rule add --rses IN2P3_RAW_DISK --copies 1 ancillary:Dataset/LSSTComCam/dstyps/fgcmLookUpTable
+
+and is located in `davs://ccdavrubinint.in2p3.fr:2880/pnfs/in2p3.fr/lsst/instrument/ancillary/LSSTComCam/calib/fgcmcal/`.
+
+.. _import-sso:
+
+Solar System Objects catalog
+----------------------------
+
+Solar System Objects catalog (see `DM-49977 <https://rubinobs.atlassian.net/browse/DM-49977>`__) is registered in Rucio in the `ancillary`, in dataset `Dataset/LSSTComCam/dstyps/DM-49977`.
+It is replicated at FrDF with:
+
+.. prompt:: bash
+
+    rucio rule add --rses IN2P3_RAW_DISK --copies 1 ancillary:Dataset/LSSTComCam/dstyps/DM-49977
+
+and is located in `davs://ccdavrubinint.in2p3.fr:2880/pnfs/in2p3.fr/lsst/instrument/ancillary/u/jkurla/dp1_ephem_2/`.
 
 Creating and populating the repository
 ======================================
@@ -245,8 +281,7 @@ Once all calibrations have been ingested, a global calibration collection is def
 Ingest reference catalogs
 -------------------------
 
-Two versions of "The Monster" catalog are ingested (see `DM-46370 <https://rubinobs.atlassian.net/browse/DM-46370>`__ and `DM-49042 <https://rubinobs.atlassian.net/browse/DM-49042>`__).
-For the first version, the corresponding dataset type is registered with:
+For the first version of "The Monster" catalog, the corresponding dataset type is registered with:
 
 .. prompt:: bash
 
@@ -324,7 +359,7 @@ A chained collection is then created:
 Ingest FGCM calibration
 -----------------------
 
-FGCM calibration (see `DM-48089 <https://rubinobs.atlassian.net/browse/DM-48089>`__) is ingested with:
+FGCM calibration is ingested with:
 
 .. prompt:: bash
 
