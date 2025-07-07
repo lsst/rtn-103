@@ -38,6 +38,7 @@ LSSTComCam calibration data are located at USDF in the `/repo/main` butler repos
 * `DM-47197 <https://rubinobs.atlassian.net/browse/DM-47197>`__
 * `DM-46360 <https://rubinobs.atlassian.net/browse/DM-46360>`__
 * `DM-47498 <https://rubinobs.atlassian.net/browse/DM-47498>`__
+
 # curated calibrations
 # * `DM-48650 <https://rubinobs.atlassian.net/browse/DM-48650>`__
 
