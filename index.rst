@@ -49,7 +49,7 @@ LSSTComCam calibration data are located at USDF in the ``/repo/main`` butler rep
 
 Each item is a ticket (``$TICKET``) that corresponds to a calibration collection (``COLLECTION=$INSTRUMENT/calib/$TICKET``), and requires an ``export.yaml`` to be ingested. These files can be found at USDF in the directory ``/sdf/data/rubin/shared/calibration_archive``:
 
-.. prompt:: bash
+.. code-block:: bash
 
     cd /sdf/data/rubin/shared/calibration_archive
     rg -l $TICKET TAXICAB-* | grep export.yaml |& head -1
