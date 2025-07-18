@@ -17,7 +17,7 @@ Input Datasets
 SkyMap
 ------
 
-Skymap used was `/pbs/throng/lsst/users/byanny/skymaps/lsst_cells_v1.skymap.config`.
+Skymap used was ``/pbs/throng/lsst/users/byanny/skymaps/lsst_cells_v1.skymap.config``.
 More details on the skymap can be found in the issue `DM-46717 <https://rubinobs.atlassian.net/browse/DM-46717>`__.
 
 .. _import-raw-exposures:
