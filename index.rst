@@ -4,7 +4,7 @@ Procedure for creating a butler repository at FrDF for ComCam multisite campaign
 
 .. abstract::
 
-   In this note we document the required input datasets and the procedure we followed at the Rubin French Data Facility (FrDF) for creating and populating a butler repository for the needs of ComCam multisite campaigns. This note is base on `DM-48746 <https://rubinobs.atlassian.net/browse/DM-48746>`__.
+   In this note we document the required input datasets and the procedure we followed at the Rubin French Data Facility (FrDF) for creating and populating a butler repository for the needs of ComCam multisite campaigns. This note is based on `DM-48746 <https://rubinobs.atlassian.net/browse/DM-48746>`__.
 
 Introduction
 ============
@@ -46,9 +46,6 @@ LSSTComCam calibration data are located at USDF in the `/repo/main` butler repos
 * `DM-47197 <https://rubinobs.atlassian.net/browse/DM-47197>`__
 * `DM-46360 <https://rubinobs.atlassian.net/browse/DM-46360>`__
 * `DM-47498 <https://rubinobs.atlassian.net/browse/DM-47498>`__
-
-### curated calibrations
-### * `DM-48650 <https://rubinobs.atlassian.net/browse/DM-48650>`__
 
 Each item is a ticket (`$TICKET`) that corresponds to a calibration collection (`COLLECTION=$INSTRUMENT/calib/$TICKET`), and requires an `export.yaml` to be ingested. These files can be found at USDF in the directory `/sdf/data/rubin/shared/calibration_archive`:
 
@@ -101,9 +98,14 @@ Reference catalogs
 ------------------
 
 Two versions of "The Monster" catalog are used (see `DM-46370 <https://rubinobs.atlassian.net/browse/DM-46370>`__ and `DM-49042 <https://rubinobs.atlassian.net/browse/DM-49042>`__).
-Both are located at USDF in `/sdf/data/rubin/shared/refcats`, and registered in Rucio, in datasets `Dataset/refcats/the_monster_20240219_1` and `Dataset/refcats/the_monster_20240904` ?
+Both are located at USDF in `/sdf/data/rubin/shared/refcats`, and registered in Rucio, in datasets 
 
-They are replicated at FRDF with:
+.. code-block:: yaml
+
+    Dataset/refcats/the_monster_20240219_1
+    Dataset/refcats/the_monster_20240219_2
+
+and `Dataset/refcats/the_monster_20240904`. They are replicated at FRDF with:
 
 .. prompt:: bash
 
