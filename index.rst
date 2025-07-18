@@ -26,16 +26,16 @@ Raw images
 ----------
 
 For the ComCam multisite butler repository we use the 16000 exposures raw images produced during the LSSTComCam campaign (about 16000 exposures).
-Raw exposures are registered in Rucio in the `raw` scope, in a dataset named `Dataset/LSSTComCam/raw/<date>`, where `<date>` is the date where the exposure has been acquired.
-They are automatically replicated at FrDF and are located in `davs://ccdavrubinint.in2p3.fr:2880/pnfs/in2p3.fr/lsst/instrument/raw/LSSTComCam/`.
-To facilitate ingestion, a metadata file `_index.json` has been generated for each exposure using the `astrometadata` package, and uploaded in the same directory as the exposure files.
+Raw exposures are registered in Rucio in the ``raw`` scope, in a dataset named ``Dataset/LSSTComCam/raw/<date>``, where ``<date>`` is the date where the exposure has been acquired.
+They are automatically replicated at FrDF and are located in ``davs://ccdavrubinint.in2p3.fr:2880/pnfs/in2p3.fr/lsst/instrument/raw/LSSTComCam/``.
+To facilitate ingestion, a metadata file ``_index.json`` has been generated for each exposure using the `astrometadata` package, and uploaded in the same directory as the exposure files.
 
 .. _import-calibration-data:
 
 Calibration data
 ----------------
 
-LSSTComCam calibration data are located at USDF in the `/repo/main` butler repository. The list of calibrations to ingest is the following:
+LSSTComCam calibration data are located at USDF in the ``/repo/main`` butler repository. The list of calibrations to ingest is the following:
 
 * `DM-48520 <https://rubinobs.atlassian.net/browse/DM-48520>`__
 * `DM-47365 <https://rubinobs.atlassian.net/browse/DM-47365>`__
@@ -47,7 +47,7 @@ LSSTComCam calibration data are located at USDF in the `/repo/main` butler repos
 * `DM-46360 <https://rubinobs.atlassian.net/browse/DM-46360>`__
 * `DM-47498 <https://rubinobs.atlassian.net/browse/DM-47498>`__
 
-Each item is a ticket (`$TICKET`) that corresponds to a calibration collection (`COLLECTION=$INSTRUMENT/calib/$TICKET`), and requires an `export.yaml` to be ingested. These files can be found at USDF in the directory `/sdf/data/rubin/shared/calibration_archive`:
+Each item is a ticket (``$TICKET``) that corresponds to a calibration collection (``COLLECTION=$INSTRUMENT/calib/$TICKET``), and requires an ``export.yaml`` to be ingested. These files can be found at USDF in the directory ``/sdf/data/rubin/shared/calibration_archive``:
 
 .. prompt:: bash
 
@@ -76,7 +76,7 @@ Each collection is registered in Rucio in the `ancillary` scope using the follow
 
     rucio did update --close ancillary:$DATASET
 
-where `$dstype` is the dataset type (`dstyps` in our case), `$COLLECTION` is the collection name as defined above, and `$DATASET` is the dataset name: `Dataset/LSSTComCam/$dstype/$TICKET`.
+where ``$dstype`` is the dataset type (``dstyps`` in our case), ``$COLLECTION`` is the collection name as defined above, and ``$DATASET`` is the dataset name: ``Dataset/LSSTComCam/$dstype/$TICKET``.
 
 The registered data products can then be replicated at FrDF:
 
@@ -90,7 +90,7 @@ or
 
     rucio rule add --rses 'IN2P3_RAW_DISK' --copies 1 ancillary:$DATASET
 
-They are located in `davs://ccdavrubinint.in2p3.fr:2880/pnfs/in2p3.fr/lsst/instrument/ancillary/LSSTComCam/calib/`.
+They are located in ``davs://ccdavrubinint.in2p3.fr:2880/pnfs/in2p3.fr/lsst/instrument/ancillary/LSSTComCam/calib/``.
 
 .. _import-reference-catalog:
 
@@ -98,7 +98,7 @@ Reference catalogs
 ------------------
 
 Two versions of "The Monster" catalog are used (see `DM-46370 <https://rubinobs.atlassian.net/browse/DM-46370>`__ and `DM-49042 <https://rubinobs.atlassian.net/browse/DM-49042>`__).
-Both are located at USDF in `/sdf/data/rubin/shared/refcats`, and registered in Rucio, in datasets 
+Both are located at USDF in ``/sdf/data/rubin/shared/refcats``, and registered in Rucio, in datasets 
 
 .. code-block:: yaml
 
@@ -123,49 +123,49 @@ and `Dataset/refcats/the_monster_20240904`. They are replicated at FRDF with:
 
     rucio rule add --rses 'IN2P3_RAW_DISK' --copies 1 raw:Dataset/refcats/the_monster_20240219_1
 
-and are located in `davs://ccdavrubinint.in2p3.fr:2880/pnfs/in2p3.fr/lsst/instrument/raw/refcats/`.
+and are located in ``davs://ccdavrubinint.in2p3.fr:2880/pnfs/in2p3.fr/lsst/instrument/raw/refcats/``.
 
 .. _import-pretrained-models:
 
 Pretrained-models catalog
 -------------------------
 
-Pretrained-models catalog is registered in Rucio in the `ancillary`, in dataset `Dataset/LSSTComCam/dstyps/pretrained-models`.
+Pretrained-models catalog is registered in Rucio in the ``ancillary``, in dataset ``Dataset/LSSTComCam/dstyps/pretrained-models``.
 It is replicated at FrDF with:
 
 .. prompt:: bash
 
     rucio rule add --rses IN2P3_RAW_DISK --copies 1 ancillary:Dataset/LSSTComCam/dstyps/pretrained-models
 
-and is located in `davs://ccdavrubinint.in2p3.fr:2880/pnfs/in2p3.fr/lsst/instrument/ancillary/pretrained_models/`.
+and is located in ``davs://ccdavrubinint.in2p3.fr:2880/pnfs/in2p3.fr/lsst/instrument/ancillary/pretrained_models/``.
 
 .. _import-fgcm:
 
 FGCM calibration
 ----------------
 
-FGCM lookup table (see `DM-48089 <https://rubinobs.atlassian.net/browse/DM-48089>`__) is registered in Rucio in the `ancillary`, in dataset `Dataset/LSSTComCam/dstyps/fgcmLookUpTable`.
+FGCM lookup table (see `DM-48089 <https://rubinobs.atlassian.net/browse/DM-48089>`__) is registered in Rucio in the ``ancillary``, in dataset ``Dataset/LSSTComCam/dstyps/fgcmLookUpTable``.
 It is replicated at FrDF with:
 
 .. prompt:: bash
 
     rucio rule add --rses IN2P3_RAW_DISK --copies 1 ancillary:Dataset/LSSTComCam/dstyps/fgcmLookUpTable
 
-and is located in `davs://ccdavrubinint.in2p3.fr:2880/pnfs/in2p3.fr/lsst/instrument/ancillary/LSSTComCam/calib/fgcmcal/`.
+and is located in ``davs://ccdavrubinint.in2p3.fr:2880/pnfs/in2p3.fr/lsst/instrument/ancillary/LSSTComCam/calib/fgcmcal/``.
 
 .. _import-sso:
 
 Solar System Objects catalog
 ----------------------------
 
-Solar System Objects catalog (see `DM-49977 <https://rubinobs.atlassian.net/browse/DM-49977>`__) is registered in Rucio in the `ancillary`, in dataset `Dataset/LSSTComCam/dstyps/DM-49977`.
+Solar System Objects catalog (see `DM-49977 <https://rubinobs.atlassian.net/browse/DM-49977>`__) is registered in Rucio in the ``ancillary``, in dataset ``Dataset/LSSTComCam/dstyps/DM-49977``.
 It is replicated at FrDF with:
 
 .. prompt:: bash
 
     rucio rule add --rses IN2P3_RAW_DISK --copies 1 ancillary:Dataset/LSSTComCam/dstyps/DM-49977
 
-and is located in `davs://ccdavrubinint.in2p3.fr:2880/pnfs/in2p3.fr/lsst/instrument/ancillary/u/jkurla/dp1_ephem_2/`.
+and is located in ``davs://ccdavrubinint.in2p3.fr:2880/pnfs/in2p3.fr/lsst/instrument/ancillary/u/jkurla/dp1_ephem_2/``.
 
 Creating and populating the repository
 ======================================
@@ -307,7 +307,7 @@ Then the ingestion is done:
 
     butler ingest-files $REPO the_monster_20240904 refcats/DM-46370/the_monster_20240904 --prefix $DATA/raw/refcats/the_monster_20240904/ -t direct the_monster_20240904.ecsv
 
-where the file `the_monster_20240904.ecsv` has been provided by B. Yanny. Similarly, for the second version:
+where the file ``the_monster_20240904.ecsv`` has been provided by B. Yanny. Similarly, for the second version:
 
 .. prompt:: bash
 
@@ -331,7 +331,7 @@ Pretrained-models catalog is ingested with:
 
     butler import $REPO --export-file pretrained-models-export.yaml -t direct $DATA/ancillary/
 
-where `pretrained-models-export.yaml` has the following content:
+where ``pretrained-models-export.yaml`` has the following content:
 
 .. code-block:: yaml
 
@@ -379,7 +379,7 @@ FGCM calibration is ingested with:
 
     butler import $REPO --export-file DM-48089-fgcmLookupTable-export.yaml -t direct $DATA/ancillary/
 
-where `DM-48089-fgcmLookupTable-export.yaml` has the following content:
+where ``DM-48089-fgcmLookupTable-export.yaml`` has the following content:
 
 .. code-block:: yaml
 
@@ -437,7 +437,7 @@ Solar System Objects catalog (see `DM-49977 <https://rubinobs.atlassian.net/brow
 
     butler import $REPO --export-file export.yaml -t direct $DATA/ancillary/
 
-where the file `export.yaml` has been provided by B. Yanny. A TAGGED collection is then created, including all datasets:
+where the file ``export.yaml`` has been provided by B. Yanny. A TAGGED collection is then created, including all datasets:
 
 .. code-block:: python
 
