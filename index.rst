@@ -28,7 +28,7 @@ Raw images
 For the ComCam multisite butler repository we use the 16000 exposures raw images produced during the LSSTComCam campaign (about 16000 exposures).
 Raw exposures are registered in Rucio in the ``raw`` scope, in a dataset named ``Dataset/LSSTComCam/raw/<date>``, where ``<date>`` is the date where the exposure has been acquired.
 They are automatically replicated at FrDF and are located in ``davs://ccdavrubinint.in2p3.fr:2880/pnfs/in2p3.fr/lsst/instrument/raw/LSSTComCam/``.
-To facilitate ingestion, a metadata file ``_index.json`` has been generated for each exposure using the `astrometadata` package, and uploaded in the same directory as the exposure files.
+To facilitate ingestion, a metadata file ``_index.json`` has been generated for each exposure using the ``astrometadata`` package, and uploaded in the same directory as the exposure files.
 
 .. _import-calibration-data:
 
@@ -62,7 +62,7 @@ For instance:
     ./TAXICAB-23/LSSTComCam.calibs.20250213a/export.yaml
 
 These files can be manually retrieved through ssh, although they will eventually be managed by Rucio.
-Each collection is registered in Rucio in the `ancillary` scope using the following command:
+Each collection is registered in Rucio in the ``ancillary`` scope using the following command:
 
 .. prompt:: bash
 
@@ -117,7 +117,7 @@ Both are located at USDF in ``/sdf/data/rubin/shared/refcats``, and registered i
     Dataset/refcats/the_monster_20240219_13
     Dataset/refcats/the_monster_20240219_14
 
-and `Dataset/refcats/the_monster_20240904`. They are replicated at FRDF with:
+and ``Dataset/refcats/the_monster_20240904``. They are replicated at FRDF with:
 
 .. prompt:: bash
 
