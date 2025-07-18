@@ -104,6 +104,18 @@ Both are located at USDF in `/sdf/data/rubin/shared/refcats`, and registered in 
 
     Dataset/refcats/the_monster_20240219_1
     Dataset/refcats/the_monster_20240219_2
+    Dataset/refcats/the_monster_20240219_3
+    Dataset/refcats/the_monster_20240219_4
+    Dataset/refcats/the_monster_20240219_5
+    Dataset/refcats/the_monster_20240219_6
+    Dataset/refcats/the_monster_20240219_7
+    Dataset/refcats/the_monster_20240219_8
+    Dataset/refcats/the_monster_20240219_9
+    Dataset/refcats/the_monster_20240219_10
+    Dataset/refcats/the_monster_20240219_11
+    Dataset/refcats/the_monster_20240219_12
+    Dataset/refcats/the_monster_20240219_13
+    Dataset/refcats/the_monster_20240219_14
 
 and `Dataset/refcats/the_monster_20240904`. They are replicated at FRDF with:
 
