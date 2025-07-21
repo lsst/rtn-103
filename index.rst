@@ -73,21 +73,21 @@ Each collection is registered in Rucio in the ``ancillary`` scope using the foll
         --collections $COLLECTION \
         --rucio-dataset $DATASET
 
-    rucio did update --close ancillary:$DATASET
+    $ rucio did update --close ancillary:$DATASET
 
 where ``$dstype`` is the dataset type (``dstyps`` in our case), ``$COLLECTION`` is the collection name as defined above, and ``$DATASET`` is the dataset name: ``Dataset/LSSTComCam/$dstype/$TICKET``.
 
 The registered data products can then be replicated at FrDF:
 
-.. prompt:: bash
+.. code-block:: bash
 
-    rucio rule add --rses 'SLAC_BUTLER_DISK|IN2P3_RAW_DISK' --copies 2 ancillary:$DATASET
+    $ rucio rule add --rse-exp 'SLAC_BUTLER_DISK|IN2P3_RAW_DISK' --copies 2 ancillary:$DATASET
 
 or
 
-.. prompt:: bash
+.. code-block:: bash
 
-    rucio rule add --rses 'IN2P3_RAW_DISK' --copies 1 ancillary:$DATASET
+    $ rucio rule add --rse-exp 'IN2P3_RAW_DISK' --copies 1 ancillary:$DATASET
 
 They are located in ``davs://ccdavrubinint.in2p3.fr:2880/pnfs/in2p3.fr/lsst/instrument/ancillary/LSSTComCam/calib/``.
 
@@ -118,9 +118,9 @@ Both are located at USDF in ``/sdf/data/rubin/shared/refcats``, and registered i
 
 and ``Dataset/refcats/the_monster_20240904``. They are replicated at FRDF with:
 
-.. prompt:: bash
+.. code-block:: bash
 
-    rucio rule add --rses 'IN2P3_RAW_DISK' --copies 1 raw:Dataset/refcats/the_monster_20240219_1
+    $ rucio rule add --rse-exp 'IN2P3_RAW_DISK' --copies 1 raw:Dataset/refcats/the_monster_20240219_1
 
 and are located in ``davs://ccdavrubinint.in2p3.fr:2880/pnfs/in2p3.fr/lsst/instrument/raw/refcats/``.
 
@@ -132,9 +132,9 @@ Pretrained-models catalog
 Pretrained-models catalog is registered in Rucio in the ``ancillary``, in dataset ``Dataset/LSSTComCam/dstyps/pretrained-models``.
 It is replicated at FrDF with:
 
-.. prompt:: bash
+.. code-block:: bash
 
-    rucio rule add --rses IN2P3_RAW_DISK --copies 1 ancillary:Dataset/LSSTComCam/dstyps/pretrained-models
+    $ rucio rule add --rse-exp IN2P3_RAW_DISK --copies 1 ancillary:Dataset/LSSTComCam/dstyps/pretrained-models
 
 and is located in ``davs://ccdavrubinint.in2p3.fr:2880/pnfs/in2p3.fr/lsst/instrument/ancillary/pretrained_models/``.
 
@@ -146,9 +146,9 @@ FGCM calibration
 FGCM lookup table (see `DM-48089 <https://rubinobs.atlassian.net/browse/DM-48089>`__) is registered in Rucio in the ``ancillary``, in dataset ``Dataset/LSSTComCam/dstyps/fgcmLookUpTable``.
 It is replicated at FrDF with:
 
-.. prompt:: bash
+.. code-block:: bash
 
-    rucio rule add --rses IN2P3_RAW_DISK --copies 1 ancillary:Dataset/LSSTComCam/dstyps/fgcmLookUpTable
+    $ rucio rule add --rse-exp IN2P3_RAW_DISK --copies 1 ancillary:Dataset/LSSTComCam/dstyps/fgcmLookUpTable
 
 and is located in ``davs://ccdavrubinint.in2p3.fr:2880/pnfs/in2p3.fr/lsst/instrument/ancillary/LSSTComCam/calib/fgcmcal/``.
 
@@ -160,9 +160,9 @@ Solar System Objects catalog
 Solar System Objects catalog (see `DM-49977 <https://rubinobs.atlassian.net/browse/DM-49977>`__) is registered in Rucio in the ``ancillary``, in dataset ``Dataset/LSSTComCam/dstyps/DM-49977``.
 It is replicated at FrDF with:
 
-.. prompt:: bash
+.. code-block:: bash
 
-    rucio rule add --rses IN2P3_RAW_DISK --copies 1 ancillary:Dataset/LSSTComCam/dstyps/DM-49977
+    $ rucio rule add --rse-exp IN2P3_RAW_DISK --copies 1 ancillary:Dataset/LSSTComCam/dstyps/DM-49977
 
 and is located in ``davs://ccdavrubinint.in2p3.fr:2880/pnfs/in2p3.fr/lsst/instrument/ancillary/u/jkurla/dp1_ephem_2/``.
 
@@ -173,15 +173,15 @@ We present here the procedure we used for creating and populating the repository
 
 The location of the repository is referred using the environment variable ``$REPO``:
 
-.. prompt:: bash
+.. code-block:: bash
 
-    export REPO='davs://ccdavrubinint.in2p3.fr:2880/pnfs/in2p3.fr/lsst/butler/ccms1'
+    $ export REPO='davs://ccdavrubinint.in2p3.fr:2880/pnfs/in2p3.fr/lsst/butler/ccms1'
 
 The location of data to be ingested is defined using the environment variable ``$DATA``:
 
-.. prompt:: bash
+.. code-block:: bash
 
-    export DATA='davs://ccdavrubinint.in2p3.fr:2880/pnfs/in2p3.fr/lsst/instrument'
+    $ export DATA='davs://ccdavrubinint.in2p3.fr:2880/pnfs/in2p3.fr/lsst/instrument'
 
 .. _create-empty-repository:
 
@@ -202,9 +202,9 @@ We use the seed configuration file ``butler-seed_ccms1.yaml`` shown below to cre
 
 To create the repository at location ``$REPO`` we use the command:
 
-.. prompt:: bash
+.. code-block:: bash
 
-    butler create --seed-config butler-seed_ccms1.yaml --override $REPO
+    $ butler create --seed-config butler-seed_ccms1.yaml --override $REPO
 
 .. _register-instrument:
 
@@ -213,9 +213,9 @@ Register instrument
 
 To register the instrument for this repository we use the command below:
 
-.. prompt:: bash
+.. code-block:: bash
 
-    butler register-instrument $REPO lsst.obs.lsst.LsstComCam
+    $ butler register-instrument $REPO lsst.obs.lsst.LsstComCam
 
 .. _register-sky-map:
 
@@ -224,9 +224,9 @@ Register SkyMap
 
 To register the skymap configuration we use the command below:
 
-.. prompt:: bash
+.. code-block:: bash
 
-    butler register-skymap --config-file lsst_cells_v1.skymap.config $REPO
+    $ butler register-skymap --config-file lsst_cells_v1.skymap.config $REPO
 
 .. _ingest-raw-exposures:
 
@@ -235,16 +235,16 @@ Ingest raw exposures
 
 We ingest the raw exposures using:
 
-.. prompt:: bash
+.. code-block:: bash
 
-    butler ingest-raws --fail-fast --transfer direct $REPO $DATA/raw/LSSTComCam
+    $ butler ingest-raws --fail-fast --transfer direct $REPO $DATA/raw/LSSTComCam
 
 Note that parallel ingestion was performed to speedup the process.
 One can then check that all visits / detectors have been ingested:
 
-.. prompt:: bash
+.. code-block:: bash
 
-    butler query-datasets $REPO raw --collections LSSTComCam/raw/all --limit 0 | wc -l
+    $ butler query-datasets $REPO raw --collections LSSTComCam/raw/all --limit 0 | wc -l
     148849
 
 Since there are 9 detectors in LSSTComCam, this corresponds to the approximate number of 16000 exposures in the LSSTComCam campaign.
@@ -256,9 +256,9 @@ Define visits
 
 To define visits from the exposures previously ingested into the repository we use the command below:
 
-.. prompt:: bash
+.. code-block:: bash
     
-    butler define-visits $REPO LSSTComCam --collections LSSTComCam/raw/all
+    $ butler define-visits $REPO LSSTComCam --collections LSSTComCam/raw/all
 
 .. _add-instrument-calibrations:
 
@@ -267,9 +267,9 @@ Add instrument's curated calibrations
 
 To ingest the known calibration data for LSSTComCam (see `DM-48650 <https://rubinobs.atlassian.net/browse/DM-48650>`__) we use the command below:
 
-.. prompt:: bash
+.. code-block:: bash
 
-    butler write-curated-calibrations $REPO lsst.obs.lsst.LsstComCam --label DM-48650
+    $ butler write-curated-calibrations $REPO lsst.obs.lsst.LsstComCam --label DM-48650
 
 .. _ingest-calibration-data:
 
@@ -278,15 +278,15 @@ Ingest calibration data
 
 To ingest calibration data we use the command below, for each collection:
 
-.. prompt:: bash
+.. code-block:: bash
 
-    butler import $REPO $DATA/ancillary --export-file export.yaml -t direct
+    $ butler import $REPO $DATA/ancillary --export-file export.yaml --transfer direct
 
 Once all calibrations have been ingested, a global calibration collection is defined:
 
-.. prompt:: bash
+.. code-block:: bash
 
-    butler collection-chain $REPO LSSTComCam/calib LSSTComCam/calib/DM-48955,LSSTComCam/calib/DM-48520,LSSTComCam/calib/DM-47365,LSSTComCam/calib/DM-47741,LSSTComCam/calib/DM-47547,LSSTComCam/calib/DM-47499,LSSTComCam/calib/DM-47447,LSSTComCam/calib/DM-47197,LSSTComCam/calib/DM-46360,LSSTComCam/calib/DM-47498,LSSTComCam/calib/DM-48650,LSSTComCam/calib/DM-48650/unbounded
+    $ butler collection-chain $REPO LSSTComCam/calib LSSTComCam/calib/DM-48955,LSSTComCam/calib/DM-48520,LSSTComCam/calib/DM-47365,LSSTComCam/calib/DM-47741,LSSTComCam/calib/DM-47547,LSSTComCam/calib/DM-47499,LSSTComCam/calib/DM-47447,LSSTComCam/calib/DM-47197,LSSTComCam/calib/DM-46360,LSSTComCam/calib/DM-47498,LSSTComCam/calib/DM-48650,LSSTComCam/calib/DM-48650/unbounded
 
 
 .. _ingest-reference-catalog:
@@ -296,28 +296,28 @@ Ingest reference catalogs
 
 For the first version of "The Monster" catalog, the corresponding dataset type is registered with:
 
-.. prompt:: bash
+.. code-block:: bash
 
-    butler register-dataset-type $REPO the_monster_20240904 SimpleCatalog htm7
+    $ butler register-dataset-type $REPO the_monster_20240904 SimpleCatalog htm7
 
 Then the ingestion is done:
 
-.. prompt:: bash
+.. code-block:: bash
 
-    butler ingest-files $REPO the_monster_20240904 refcats/DM-46370/the_monster_20240904 --prefix $DATA/raw/refcats/the_monster_20240904/ -t direct the_monster_20240904.ecsv
+    $ butler ingest-files $REPO the_monster_20240904 refcats/DM-46370/the_monster_20240904 --prefix $DATA/raw/refcats/the_monster_20240904/ --transfer direct the_monster_20240904.ecsv
 
 where the file ``the_monster_20240904.ecsv`` has been provided by B. Yanny. Similarly, for the second version:
 
-.. prompt:: bash
+..  code-block:: bash
 
-    butler register-dataset-type $REPO the_monster_20250219 SimpleCatalog htm7
-    butler ingest-files $REPO the_monster_20250219 refcats/DM-49042/the_monster_20250219 --prefix $DATA/raw/refcats/the_monster_20250219/ -t direct the_monster_20250219.ecsv
+    $ butler register-dataset-type $REPO the_monster_20250219 SimpleCatalog htm7
+    $ butler ingest-files $REPO the_monster_20250219 refcats/DM-49042/the_monster_20250219 --prefix $DATA/raw/refcats/the_monster_20250219/ --transfer direct the_monster_20250219.ecsv
 
 A chained collection is then created:
 
-.. prompt:: bash
+.. code-block:: bash
 
-    butler collection-chain $REPO refcats refcats/DM-46370/the_monster_20240904,refcats/DM-49042/the_monster_20250219
+    $ butler collection-chain $REPO refcats refcats/DM-46370/the_monster_20240904,refcats/DM-49042/the_monster_20250219
 
 .. _ingest-pretrained-models:
 
@@ -326,9 +326,9 @@ Ingest Pretrained-models catalog
 
 Pretrained-models catalog is ingested with:
 
-.. prompt:: bash
+.. code-block:: bash
 
-    butler import $REPO --export-file pretrained-models-export.yaml -t direct $DATA/ancillary/
+    $ butler import $REPO --export-file pretrained-models-export.yaml --transfer direct $DATA/ancillary/
 
 where ``pretrained-models-export.yaml`` has the following content:
 
@@ -363,9 +363,9 @@ where ``pretrained-models-export.yaml`` has the following content:
     
 A chained collection is then created:
 
-.. prompt:: bash	
+.. code-block:: bash	
 
-    butler collection-chain $REPO pretrained_models pretrained_models/tac_cnn_comcam_2025-02-18
+    $ butler collection-chain $REPO pretrained_models pretrained_models/tac_cnn_comcam_2025-02-18
 
 .. _ingest-fgcm:
 
@@ -374,9 +374,9 @@ Ingest FGCM calibration
 
 FGCM calibration is ingested with:
 
-.. prompt:: bash
+.. code-block:: bash
 
-    butler import $REPO --export-file DM-48089-fgcmLookupTable-export.yaml -t direct $DATA/ancillary/
+    $ butler import $REPO --export-file DM-48089-fgcmLookupTable-export.yaml --transfer direct $DATA/ancillary/
 
 where ``DM-48089-fgcmLookupTable-export.yaml`` has the following content:
 
@@ -421,9 +421,9 @@ where ``DM-48089-fgcmLookupTable-export.yaml`` has the following content:
 
 A chained collection is then created:
 
-.. prompt:: bash
+.. code-block:: bash
 
-    butler collection-chain $REPO LSSTComCam/calib/fgcmcal LSSTComCam/calib/fgcmcal/DM-48089  
+    $ butler collection-chain $REPO LSSTComCam/calib/fgcmcal LSSTComCam/calib/fgcmcal/DM-48089  
 
 .. _ingest-sso:
 
@@ -432,9 +432,9 @@ Ingest Solar System Objects catalog
 
 Solar System Objects catalog (see `DM-49977 <https://rubinobs.atlassian.net/browse/DM-49977>`__) is ingested with:
 
-.. prompt:: bash
+.. code-block:: bash
 
-    butler import $REPO --export-file export.yaml -t direct $DATA/ancillary/
+    $ butler import $REPO --export-file export.yaml --transfer direct $DATA/ancillary/
 
 where the file ``export.yaml`` has been provided by B. Yanny. A TAGGED collection is then created, including all datasets:
 
@@ -452,20 +452,20 @@ Create global collection
 
 Within the 16000 exposures ingested, about 2000 are Science exposures (each with 9 detectors):
 
-.. prompt:: bash
+.. code-block:: bash
 
-    butler query-datasets $REPO raw --collections LSSTComCam/raw/all --where "exposure.observation_type='science'" --limit 0 |wc -l
+    $ butler query-datasets $REPO raw --collections LSSTComCam/raw/all --where "exposure.observation_type='science'" --limit 0 |wc -l
     19205
 
 From these ones, 1792 exposures have been selected to be processed (see `DM-49594 <https://rubinobs.atlassian.net/browse/DM-49594>`__). We define therefore a collection containing thse 1792 selected LSSTComCam exposures:
 
-.. prompt:: bash
+.. code-block:: bash
 
-    python /pbs/throng/lsst/users/byanny/butler_associate_visits.py $REPO /pbs/throng/lsst/users/byanny/dp1_good_visits.txt LSSTComCam/raw/DP1-RC3/DM-49594 LSSTComCam/raw/all LSSTComCam 2000
+    $ python /pbs/throng/lsst/users/byanny/butler_associate_visits.py $REPO /pbs/throng/lsst/users/byanny/dp1_good_visits.txt LSSTComCam/raw/DP1-RC3/DM-49594 LSSTComCam/raw/all LSSTComCam 2000
 
 Finally, we define a collection containg all input collections previously defined:
 
-.. prompt:: bash
+.. code-block:: bash
 
     butler collection-chain $REPO LSSTComCam/DP1/defaults LSSTComCam/raw/DP1-RC3/DM-49594,LSSTComCam/calib,refcats,skymaps,pretrained_models,LSSTComCam/calib/fgcmcal,LSSTComCam/calib/DM-49977/DP1.0/preloaded_SsObjects.20250409
 
