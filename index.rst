@@ -467,6 +467,6 @@ Finally, we define a collection containg all input collections previously define
 
 .. code-block:: bash
 
-    butler collection-chain $REPO LSSTComCam/DP1/defaults LSSTComCam/raw/DP1-RC3/DM-49594,LSSTComCam/calib,refcats,skymaps,pretrained_models,LSSTComCam/calib/fgcmcal,LSSTComCam/calib/DM-49977/DP1.0/preloaded_SsObjects.20250409
+    $ butler collection-chain $REPO LSSTComCam/DP1/defaults LSSTComCam/raw/DP1-RC3/DM-49594,LSSTComCam/calib,refcats,skymaps,pretrained_models,LSSTComCam/calib/fgcmcal,LSSTComCam/calib/DM-49977/DP1.0/preloaded_SsObjects.20250409
 
 
