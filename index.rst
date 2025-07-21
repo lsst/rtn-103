@@ -60,23 +60,18 @@ For instance:
     $ rg -l DM-48520 /sdf/data/rubin/shared/calibration_archive/TAXICAB-* | grep export.yaml |& head -1
     ./TAXICAB-23/LSSTComCam.calibs.20250213a/export.yaml
 
-.. prompt:: bash
-
-    rg -l DM-48520 /sdf/data/rubin/shared/calibration_archive/TAXICAB-* | grep export.yaml |& head -1
-    ./TAXICAB-23/LSSTComCam.calibs.20250213a/export.yaml
-
 These files can be manually retrieved through ssh, although they will eventually be managed by Rucio.
 Each collection is registered in Rucio in the ``ancillary`` scope using the following command:
 
-.. prompt:: bash
+.. code-block:: bash
 
-    rucio-register data-products \
-      -s 10 \
-      -C /sdf/data/rubin/shared/calibration_archive/rucio/main-calib-config.yaml \
-      -r /repo/main \
-      -t $dstype \
-      -c $COLLECTION \
-      -d $DATASET
+    $ rucio-register data-products \
+        --chunk-size 10 \
+        --rucio-register-config /sdf/data/rubin/shared/calibration_archive/rucio/main-calib-config.yaml \
+        --repo /repo/main \
+        --dataset-type $dstype \
+        --collections $COLLECTION \
+        --rucio-dataset $DATASET
 
     rucio did update --close ancillary:$DATASET
 
