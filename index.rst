@@ -60,6 +60,11 @@ For instance:
     $ rg -l DM-48520 /sdf/data/rubin/shared/calibration_archive/TAXICAB-* | grep export.yaml |& head -1
     ./TAXICAB-23/LSSTComCam.calibs.20250213a/export.yaml
 
+.. prompt:: bash
+
+    rg -l DM-48520 /sdf/data/rubin/shared/calibration_archive/TAXICAB-* | grep export.yaml |& head -1
+    ./TAXICAB-23/LSSTComCam.calibs.20250213a/export.yaml
+
 These files can be manually retrieved through ssh, although they will eventually be managed by Rucio.
 Each collection is registered in Rucio in the ``ancillary`` scope using the following command:
 
