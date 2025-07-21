@@ -51,14 +51,13 @@ Each item is a ticket (``$TICKET``) that corresponds to a calibration collection
 
 .. code-block:: bash
 
-    cd /sdf/data/rubin/shared/calibration_archive
-    rg -l $TICKET TAXICAB-* | grep export.yaml |& head -1
+    $ rg -l $TICKET /sdf/data/rubin/shared/calibration_archive/TAXICAB-* | grep export.yaml |& head -1
 
 For instance:
 
-.. prompt:: bash
+.. code-block:: bash
 
-    rg -l DM-48520 TAXICAB-* | grep export.yaml |& head -1
+    $ rg -l DM-48520 /sdf/data/rubin/shared/calibration_archive/TAXICAB-* | grep export.yaml |& head -1
     ./TAXICAB-23/LSSTComCam.calibs.20250213a/export.yaml
 
 These files can be manually retrieved through ssh, although they will eventually be managed by Rucio.
