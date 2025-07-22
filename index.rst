@@ -122,7 +122,8 @@ and ``Dataset/refcats/the_monster_20240904``. They are replicated at FRDF with:
 
 .. code-block:: bash
 
-    $ rucio rule add --rse-exp 'IN2P3_RAW_DISK' --copies 1 raw:Dataset/refcats/the_monster_20240219_1
+    $ rucio rule add --rse-exp 'IN2P3_RAW_DISK' \
+        --copies 1 raw:Dataset/refcats/the_monster_20240219_1
 
 and are located in ``davs://ccdavrubinint.in2p3.fr:2880/pnfs/in2p3.fr/lsst/instrument/raw/refcats/``.
 
@@ -136,7 +137,8 @@ It is replicated at FrDF with:
 
 .. code-block:: bash
 
-    $ rucio rule add --rse-exp IN2P3_RAW_DISK --copies 1 ancillary:Dataset/LSSTComCam/dstyps/pretrained-models
+    $ rucio rule add --rse-exp IN2P3_RAW_DISK \
+        --copies 1 ancillary:Dataset/LSSTComCam/dstyps/pretrained-models
 
 and is located in ``davs://ccdavrubinint.in2p3.fr:2880/pnfs/in2p3.fr/lsst/instrument/ancillary/pretrained_models/``.
 
@@ -150,7 +152,8 @@ It is replicated at FrDF with:
 
 .. code-block:: bash
 
-    $ rucio rule add --rse-exp IN2P3_RAW_DISK --copies 1 ancillary:Dataset/LSSTComCam/dstyps/fgcmLookUpTable
+    $ rucio rule add --rse-exp IN2P3_RAW_DISK \
+        --copies 1 ancillary:Dataset/LSSTComCam/dstyps/fgcmLookUpTable
 
 and is located in ``davs://ccdavrubinint.in2p3.fr:2880/pnfs/in2p3.fr/lsst/instrument/ancillary/LSSTComCam/calib/fgcmcal/``.
 
@@ -164,7 +167,8 @@ It is replicated at FrDF with:
 
 .. code-block:: bash
 
-    $ rucio rule add --rse-exp IN2P3_RAW_DISK --copies 1 ancillary:Dataset/LSSTComCam/dstyps/DM-49977
+    $ rucio rule add --rse-exp IN2P3_RAW_DISK \
+      --copies 1 ancillary:Dataset/LSSTComCam/dstyps/DM-49977
 
 and is located in ``davs://ccdavrubinint.in2p3.fr:2880/pnfs/in2p3.fr/lsst/instrument/ancillary/u/jkurla/dp1_ephem_2/``.
 
