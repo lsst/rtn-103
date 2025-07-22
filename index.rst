@@ -81,13 +81,15 @@ The registered data products can then be replicated at FrDF:
 
 .. code-block:: bash
 
-    $ rucio rule add --rse-exp 'SLAC_BUTLER_DISK|IN2P3_RAW_DISK' --copies 2 ancillary:$DATASET
+    $ rucio rule add --rse-exp 'SLAC_BUTLER_DISK|IN2P3_RAW_DISK' \
+        --copies 2 ancillary:$DATASET
 
 or
 
 .. code-block:: bash
 
-    $ rucio rule add --rse-exp 'IN2P3_RAW_DISK' --copies 1 ancillary:$DATASET
+    $ rucio rule add --rse-exp 'IN2P3_RAW_DISK' \
+        --copies 1 ancillary:$DATASET
 
 They are located in ``davs://ccdavrubinint.in2p3.fr:2880/pnfs/in2p3.fr/lsst/instrument/ancillary/LSSTComCam/calib/``.
 
