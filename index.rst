@@ -9,6 +9,9 @@ Procedure for creating a butler repository at FrDF for ComCam multisite campaign
 Introduction
 ============
 
+In the first par of this note, we list the input datasets, their corresponding Rucio datasets, as well as their location at FrDF. In the second part, we detail the procedure used to ingest these datasets in the Butler repository. In the last part we give procedures to inspect thhe repository and check that the content is consistent. 
+
+
 Input Datasets
 ==============
 
@@ -475,5 +478,8 @@ Finally, we define a collection containg all input collections previously define
 .. code-block:: bash
 
     $ butler collection-chain $REPO LSSTComCam/DP1/defaults LSSTComCam/raw/DP1-RC3/DM-49594,LSSTComCam/calib,refcats,skymaps,pretrained_models,LSSTComCam/calib/fgcmcal,LSSTComCam/calib/DM-49977/DP1.0/preloaded_SsObjects.20250409
+
+Inspecting and checking the Butler repository
+=============================================
 
 
