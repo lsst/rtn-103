@@ -4,7 +4,7 @@ Procedure for creating a butler repository at FrDF for ComCam multisite campaign
 
 .. abstract::
 
-   In this note we document the required input datasets and the procedure we followed at the Rubin French Data Facility (FrDF) for creating and populating a butler repository for the needs of ComCam multisite campaigns. This note is based on `DM-48746 <https://rubinobs.atlassian.net/browse/DM-48746>`__.
+   In this note we document the required input datasets and the procedure we followed at the Rubin French Data Facility (FrDF) for creating and populating a butler repository for the needs of ComCam multisite campaigns, using the middleware from the weekly ``w_2025_20``. This note is based on `DM-48746 <https://rubinobs.atlassian.net/browse/DM-48746>`__.
 
 Introduction
 ============
@@ -25,7 +25,7 @@ More details on the skymap can be found in the issue `DM-46717 <https://rubinobs
 Raw images
 ----------
 
-For the ComCam multisite butler repository we use the 16000 exposures raw images produced during the LSSTComCam campaign (about 16000 exposures).
+For the ComCam multisite butler repository we use the 16000 exposures recorded during the LSSTComCam campaign.
 Raw exposures are registered in Rucio in the ``raw`` scope, in a dataset named ``Dataset/LSSTComCam/raw/<date>``, where ``<date>`` is the date where the exposure has been acquired.
 They are automatically replicated at FrDF and are located in ``davs://ccdavrubinint.in2p3.fr:2880/pnfs/in2p3.fr/lsst/instrument/raw/LSSTComCam/``.
 To facilitate ingestion, a metadata file ``_index.json`` has been generated for each exposure using the ``astrometadata`` package, and uploaded in the same directory as the exposure files.
