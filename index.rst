@@ -474,7 +474,7 @@ Finally, we define a collection containg all input collections previously define
 Inspecting and checking the Butler repository
 =============================================
 
-The ``LSSTComCam/DP1/defaults`` should look like this:
+The ``LSSTComCam/DP1/defaults`` collection should look like this:
 
 .. code-block:: bash
 
