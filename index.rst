@@ -250,14 +250,6 @@ We ingest the raw exposures using:
     $ butler ingest-raws --fail-fast --transfer direct $REPO $DATA/raw/LSSTComCam
 
 Note that parallel ingestion was performed to speedup the process.
-One can then check that all visits / detectors have been ingested:
-
-.. code-block:: bash
-
-    $ butler query-datasets $REPO raw --collections LSSTComCam/raw/all --limit 0 | wc -l
-    148849
-
-Since there are 9 detectors in LSSTComCam, this corresponds to the approximate number of 16000 exposures in the LSSTComCam campaign.
 
 .. _define-visits:
 
@@ -482,4 +474,80 @@ Finally, we define a collection containg all input collections previously define
 Inspecting and checking the Butler repository
 =============================================
 
+The ``LSSTComCam/DP1/defaults`` should look like this:
+
+.. code-block:: bash
+
+$ butler query-collections --chains=tree $REPO LSSTComCam/DP1/defaults
+                                   Name                                        Type   
+-------------------------------------------------------------------------- -----------
+LSSTComCam/DP1/defaults                                                    CHAINED    
+  LSSTComCam/raw/DP1-RC3/DM-49594                                          TAGGED     
+  LSSTComCam/calib                                                         CHAINED    
+    LSSTComCam/calib/DM-48955                                              CHAINED    
+      LSSTComCam/calib/DM-48955/illumCorr/illuminationCorrection.20250224a CALIBRATION
+    LSSTComCam/calib/DM-48520                                              CHAINED    
+      LSSTComCam/calib/DM-48520/DP1/flat-y.20250207a                       CALIBRATION
+      LSSTComCam/calib/DM-48520/DP1/flat-z.20250207a                       CALIBRATION
+      LSSTComCam/calib/DM-48520/DP1/flat-i.20250207a                       CALIBRATION
+      LSSTComCam/calib/DM-48520/DP1/flat-r.20250207a                       CALIBRATION
+      LSSTComCam/calib/DM-48520/DP1/flat-g.20250207a                       CALIBRATION
+      LSSTComCam/calib/DM-48520/DP1/flat-u.20250207a                       CALIBRATION
+      LSSTComCam/calib/DM-48520/DP1/dark.20250207a                         CALIBRATION
+      LSSTComCam/calib/DM-48520/DP1/bias.20250207a                         CALIBRATION
+      LSSTComCam/calib/DM-48520/DP1/cti.20250207a                          CALIBRATION
+      LSSTComCam/calib/DM-48520/DP1/defects.20250207a                      CALIBRATION
+    LSSTComCam/calib/DM-47365                                              CHAINED    
+      LSSTComCam/calib/DM-47365/addManualDefects/defects.20241211a         CALIBRATION
+    LSSTComCam/calib/DM-47741                                              CHAINED    
+      LSSTComCam/calib/DM-47741/twiflat/flat-y.20241120a                   CALIBRATION
+    LSSTComCam/calib/DM-47547                                              CHAINED    
+      LSSTComCam/calib/DM-47547/twiflat/flat-z.20241113a                   CALIBRATION
+      LSSTComCam/calib/DM-47547/twiflat/flat-r.20241113a                   CALIBRATION
+      LSSTComCam/calib/DM-47547/twiflat/flat-g.20241113a                   CALIBRATION
+    LSSTComCam/calib/DM-47499                                              CHAINED    
+      LSSTComCam/calib/DM-47499/twiflat/flat-u.20241110a                   CALIBRATION
+    LSSTComCam/calib/DM-47447                                              CHAINED    
+      LSSTComCam/calib/DM-47447/gainFixup/flat-g.20241107a                 CALIBRATION
+      LSSTComCam/calib/DM-47447/gainFixup/flat-i.20241107a                 CALIBRATION
+      LSSTComCam/calib/DM-47447/gainFixup/flat-r.20241107a                 CALIBRATION
+      LSSTComCam/calib/DM-47447/gainFixup/dark.20241107a                   CALIBRATION
+      LSSTComCam/calib/DM-47447/gainFixup/bias.20241107a                   CALIBRATION
+      LSSTComCam/calib/DM-47447/gainFixup/ptc.20241107a                    CALIBRATION
+    LSSTComCam/calib/DM-47197                                              CHAINED    
+      LSSTComCam/calib/DM-47197/pseudoFlat/flat-r.20241028d                CALIBRATION
+      LSSTComCam/calib/DM-47197/pseudoFlat/flat-i.20241028d                CALIBRATION
+    LSSTComCam/calib/DM-46360                                              CHAINED    
+      LSSTComCam/calib/DM-46360/isrTaskLSST/flat-i.20240926a               CALIBRATION
+      LSSTComCam/calib/DM-46360/isrTaskLSST/flat-r.20240926a               CALIBRATION
+      LSSTComCam/calib/DM-46360/isrTaskLSST/flat-g.20240926a               CALIBRATION
+      LSSTComCam/calib/DM-46360/isrTaskLSST/dark.20240926a                 CALIBRATION
+      LSSTComCam/calib/DM-46360/isrTaskLSST/bias.20240926a                 CALIBRATION
+      LSSTComCam/calib/DM-46360/isrTaskLSST/bfk.20240926a                  CALIBRATION
+      LSSTComCam/calib/DM-46360/isrTaskLSST/ptc.20240926a                  CALIBRATION
+      LSSTComCam/calib/DM-46360/isrTaskLSST/linearizer.20240926a           CALIBRATION
+      LSSTComCam/calib/DM-46360/isrTaskLSST/defects.20240926a              CALIBRATION
+    LSSTComCam/calib/DM-47498                                              CHAINED    
+      LSSTComCam/calib/DM-47498/fallbackFlats/flat-all.20241112a           CALIBRATION
+    LSSTComCam/calib/DM-48650                                              CALIBRATION
+    LSSTComCam/calib/DM-48650/unbounded                                    RUN        
+  refcats                                                                  CHAINED    
+    refcats/DM-46370/the_monster_20240904                                  RUN        
+    refcats/DM-49042/the_monster_20250219                                  RUN        
+  skymaps                                                                  RUN        
+  pretrained_models                                                        CHAINED    
+    pretrained_models/tac_cnn_comcam_2025-02-18                            RUN        
+  LSSTComCam/calib/fgcmcal                                                 CHAINED    
+    LSSTComCam/calib/fgcmcal/DM-48089                                      RUN        
+  LSSTComCam/calib/DM-49977/DP1.0/preloaded_SsObjects.20250409             TAGGED     
+
+
+One can then check that all visits / detectors have correctly been ingested:
+
+.. code-block:: bash
+
+    $ butler query-datasets $REPO raw --collections LSSTComCam/raw/all --limit 0 | wc -l
+    148849
+
+Since there are 9 detectors in LSSTComCam, this corresponds to the approximate number of 16000 exposures in the LSSTComCam campaign.
 
