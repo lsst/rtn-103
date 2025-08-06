@@ -478,7 +478,7 @@ The ``LSSTComCam/DP1/defaults`` should look like this:
 
 .. code-block:: bash
 
-$ butler query-collections --chains=tree $REPO LSSTComCam/DP1/defaults
+    $ butler query-collections --chains=tree $REPO LSSTComCam/DP1/defaults
                                        Name                                        Type   
     -------------------------------------------------------------------------- -----------
     LSSTComCam/DP1/defaults                                                    CHAINED    
