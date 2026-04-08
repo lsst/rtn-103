@@ -465,7 +465,7 @@ From these ones, 1792 exposures have been selected to be processed (see `DM-4959
 
     $ python /pbs/throng/lsst/users/byanny/butler_associate_visits.py $REPO /pbs/throng/lsst/users/byanny/dp1_good_visits.txt LSSTComCam/raw/DP1-RC3/DM-49594 LSSTComCam/raw/all LSSTComCam 2000
 
-Finally, we define a collection containg all input collections previously defined:
+Finally, we define a collection containing all input collections previously defined:
 
 .. code-block:: bash
 
