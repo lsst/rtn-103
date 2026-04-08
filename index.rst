@@ -4,7 +4,7 @@ Procedure for creating a butler repository at FrDF for ComCam multisite campaign
 
 .. abstract::
 
-   In this note we document the required input datasets and the procedure we followed at the Rubin French Data Facility (FrDF) for creating and populating a butler repository for the needs of ComCam multisite campaigns, using the middleware from the weekly ``w_2025_20``. This note is based on `DM-48746 <https://rubinobs.atlassian.net/browse/DM-48746>`__.
+   In this note we document the required input datasets and the procedure we followed at the Rubin France Data Facility (FrDF) for creating and populating a butler repository for the needs of ComCam multisite campaigns, using the middleware from the weekly ``w_2025_20``. This note is based on `DM-48746 <https://rubinobs.atlassian.net/browse/DM-48746>`__.
 
 Introduction
 ============
